@@ -1,0 +1,3 @@
+select * from tarawatinapdetail
+where idisobat <> 1
+and idisobat <> 0

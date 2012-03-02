@@ -1,0 +1,11 @@
+- nama obat
+- sumber obat       (pabrik)
+- sumber pembelian  (pbf)
+- jml pemasukan
+- jml pengeluaran
+- jml kadaluarsa
+
+
+table: taobat
+  field tambahan: rak
+

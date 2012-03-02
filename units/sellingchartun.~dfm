@@ -1,0 +1,55 @@
+object sellingchartfrm: Tsellingchartfrm
+  Left = 251
+  Top = 163
+  BorderStyle = bsSingle
+  Caption = 'Chart Penjualan'
+  ClientHeight = 442
+  ClientWidth = 908
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBChart1: TDBChart
+    Left = 48
+    Top = 24
+    Width = 729
+    Height = 385
+    BackWall.Brush.Color = clWhite
+    BackWall.Brush.Style = bsClear
+    Title.Text.Strings = (
+      'TDBChart')
+    TabOrder = 0
+    object Series1: TBarSeries
+      Marks.ArrowLength = 20
+      Marks.Visible = True
+      DataSource = jualchartdset
+      SeriesColor = clRed
+      Title = 'Penjualan'
+      XLabelsSource = 'apTgl'
+      XValues.DateTime = False
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      XValues.ValueSource = 'apppn'
+      YValues.DateTime = False
+      YValues.Name = 'Bar'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+  end
+  object jualchartdset: TZQuery
+    Connection = dmz.rinoconn
+    Active = True
+    SQL.Strings = (
+      'select * from taapotik order by ap_idx desc'
+      'limit 100')
+    Params = <>
+    Left = 848
+    Top = 352
+  end
+end

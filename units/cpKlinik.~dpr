@@ -1,0 +1,173 @@
+program cpKlinik;
+
+uses
+  Forms,
+  unUtama in 'unUtama.pas' {frmUtama},
+  unDm in 'unDm.pas' {dm: TDataModule},
+  unFrmAddDokter in 'unFrmAddDokter.pas' {frmAddDokter},
+  unFrmEditDokter in 'unFrmEditDokter.pas' {frmEditDokter},
+  unFrmViewDokter in 'unFrmViewDokter.pas' {frmViewDokter},
+  unFrmViewKaryawan in 'unFrmViewKaryawan.pas' {frmViewKaryawan},
+  unFrmAddKaryawan in 'unFrmAddKaryawan.pas' {frmAddKaryawan},
+  unFrmViewPasien in 'unFrmViewPasien.pas' {frmViewPasien},
+  unFrmPasien in 'unFrmPasien.pas' {frmPasien},
+  unFrmAddPasien in 'unFrmAddPasien.pas' {frmAddPasien},
+  unFrmPoli in 'unFrmPoli.pas' {frmPoli},
+  unFrmViewPoli in 'unFrmViewPoli.pas' {frmViewPoli},
+  unFrmViewDepartemen in 'unFrmViewDepartemen.pas' {frmViewDepartemen},
+  unFrmViewBed in 'unFrmViewBed.pas' {frmViewBed},
+  unFrmAddBed in 'unFrmAddBed.pas' {frmAddBed},
+  unfrmObat in '..\cpApotik\unfrmObat.pas' {frmObat},
+  unViewObat in 'unViewObat.pas' {frmViewObat},
+  unFrmRawatInap in 'unFrmRawatInap.pas' {frmRawatInap},
+  unFrmMaster in 'unFrmMaster.pas' {frmMaster},
+  unFrmTransaksiRawatInap in 'unFrmTransaksiRawatInap.pas' {frmTreatment},
+  unFrmService in 'unFrmService.pas' {frmService},
+  unFrmSetting in 'unFrmSetting.pas' {frmSetting},
+  unFrmPassword in 'unFrmPassword.pas' {frmPassword},
+  unEditKamar in 'unEditKamar.pas' {frmEditKamar},
+  unEditPoli in 'unEditPoli.pas' {frmEditPoli},
+  unFrmPerusahaan in 'unFrmPerusahaan.pas' {frmPerusahaan},
+  unFrmRumahSakit in 'unFrmRumahSakit.pas' {frmRumahSakit},
+  unFrmMigrasi in 'unFrmMigrasi.pas' {frmMigrasi},
+  unFrmItemLab in 'unFrmItemLab.pas' {frmItemLab},
+  unFrmGroupLab in 'unFrmGroupLab.pas' {frmGroupLab},
+  unFrmViewItemLab in 'unFrmViewItemLab.pas' {frmViewItemLab},
+  unFrmLab in 'unFrmLab.pas' {frmLab},
+  unFrmCetakLab in 'unFrmCetakLab.pas' {frmCetakLab},
+  unFrmPilihPasien in 'unFrmPilihPasien.pas' {frmPilihPasien},
+  unFrmRegLab in 'unFrmRegLab.pas' {frmRegLab},
+  unFrmRontgen in 'unFrmRontgen.pas' {frmRontgen},
+  unFrmPerujuk in 'unFrmPerujuk.pas' {frmPerujuk},
+  unFrmLayananRontgen in 'unFrmLayananRontgen.pas' {frmLayananRontgen},
+  unFrmPreferensi in 'unFrmPreferensi.pas' {frmPreferensi},
+  unFrmAlkes in 'unFrmAlkes.pas' {frmAlkes},
+  unitFrmBillingPasienNonAktif in 'unitFrmBillingPasienNonAktif.pas' {frmBillingPasiennonaktif},
+  unfrmViewAlkes in 'unfrmViewAlkes.pas' {frmViewAlkes},
+  unfrmApotek in 'unfrmApotek.pas' {frmApotek},
+  unfrmViewRawatInap in 'unfrmViewRawatInap.pas' {frmViewRawatInap},
+  unFrmViewPasienPoli in 'unFrmViewPasienPoli.pas' {frmViewPasienPoli},
+  unFrmApotik in 'unFrmApotik.pas' {frmApotik},
+  unfrmtarifdokter in 'unfrmtarifdokter.pas' {frmtarifdokter},
+  unfrmcetak in 'unfrmcetak.pas' {frmCetak},
+  undmrpt in 'undmrpt.pas' {dmrpt: TDataModule},
+  unfrmViewRontgen in 'unfrmViewRontgen.pas' {frmViewRontgen},
+  unfrmpolitreatment in 'unfrmpolitreatment.pas' {frmPoliTreatment},
+  unfrmviewservicedokter in 'unfrmviewservicedokter.pas' {frmViewServicedokter},
+  unfrmmigrasirawatinap in 'unfrmmigrasirawatinap.pas' {frmMigrasiRawatInap},
+  unfrmviewpolinonmigrasi in 'unfrmviewpolinonmigrasi.pas' {frmviewpolinonmigrasi},
+  unfrmtambahanapotik in 'unfrmtambahanapotik.pas' {frmtambahanapotik},
+  frmviewbiayatambahan in 'frmviewbiayatambahan.pas' {frmviewtambahan},
+  unfrmstokobat in 'unfrmstokobat.pas' {frmStokobat},
+  unfrmhargaobat in 'unfrmhargaobat.pas' {frmhargaobat},
+  unfrmgantipassword in 'unfrmgantipassword.pas' {frmGantiPassword},
+  uneditobat in 'uneditobat.pas' {frmEditObat},
+  unfrmsatuanobat in 'unfrmsatuanobat.pas' {frmSatuan},
+  unfrmantrian in 'unfrmantrian.pas' {frmantrian},
+  unfrmEditKaryawan in 'unfrmEditKaryawan.pas' {frmEditKaryawan},
+  unfrmracikan in 'unfrmracikan.pas' {frmracikan},
+  unfrmtariblab in 'unfrmtariblab.pas' {frmtariflab},
+  unfrmviewtariflab in 'unfrmviewtariflab.pas' {frmviewtariflab},
+  unfrmViewPasienlab in 'unfrmViewPasienlab.pas' {frmViewPasienLab},
+  unfrmhasillab in 'unfrmhasillab.pas' {frmHasilLab},
+  unfrmviewreglab in 'unfrmviewreglab.pas' {frmViewRegLab},
+  unfrmcetakkwitansilab in 'unfrmcetakkwitansilab.pas' {frmcetakkwitansilab},
+  kwitansi in '..\Delphi Impotrant Units\kwitansi.pas',
+  unfrmcetakjualapotik in 'unfrmcetakjualapotik.pas' {frmCetakJualApotik},
+  unfrmtambahdeposit in 'unfrmtambahdeposit.pas' {frmTambahDeposit},
+  frmbillingrontgen in 'frmbillingrontgen.pas' {frmbillrontgen},
+  unfrmviewpasienrontgen in 'unfrmviewpasienrontgen.pas' {frmViewPasienRontgen},
+  unfrmpasswordsetwkt in 'unfrmpasswordsetwkt.pas' {frmsettingwktkeluar},
+  unfrmlaporanbilling in 'unfrmlaporanbilling.pas' {frmLaporanBilling},
+  unfrmuangkeluar in 'unfrmuangkeluar.pas' {frmUangKeluar},
+  unfrmjenistindakan in 'unfrmjenistindakan.pas' {frmJenisTindakan},
+  unFungsi in 'unFungsi.pas',
+  unfrmkomisidokter in 'unfrmkomisidokter.pas' {frmKomisiDokter},
+  unfrmrawatbaby in 'unfrmrawatbaby.pas' {frmRawatBaby};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TfrmPassword, frmPassword);
+  Application.CreateForm(TfrmUtama, frmUtama);
+  Application.CreateForm(TfrmService, frmService);
+  Application.CreateForm(Tdm, dm);
+  Application.CreateForm(TfrmAddDokter, frmAddDokter);
+  Application.CreateForm(TfrmEditDokter, frmEditDokter);
+  Application.CreateForm(TfrmViewDokter, frmViewDokter);
+  Application.CreateForm(TfrmViewKaryawan, frmViewKaryawan);
+  Application.CreateForm(TfrmAddKaryawan, frmAddKaryawan);
+  Application.CreateForm(TfrmViewPasien, frmViewPasien);
+  Application.CreateForm(TfrmPasien, frmPasien);
+  Application.CreateForm(TfrmAddPasien, frmAddPasien);
+  Application.CreateForm(TfrmPoli, frmPoli);
+  Application.CreateForm(TfrmViewPoli, frmViewPoli);
+  Application.CreateForm(TfrmViewDepartemen, frmViewDepartemen);
+  Application.CreateForm(TfrmViewBed, frmViewBed);
+  Application.CreateForm(TfrmAddBed, frmAddBed);
+  Application.CreateForm(TfrmObat, frmObat);
+  Application.CreateForm(TfrmViewObat, frmViewObat);
+  Application.CreateForm(TfrmRawatInap, frmRawatInap);
+  Application.CreateForm(TfrmMaster, frmMaster);
+  Application.CreateForm(TfrmTreatment, frmTreatment);
+  Application.CreateForm(TfrmSetting, frmSetting);
+  Application.CreateForm(TfrmEditKamar, frmEditKamar);
+  Application.CreateForm(TfrmEditPoli, frmEditPoli);
+  Application.CreateForm(TfrmPerusahaan, frmPerusahaan);
+  Application.CreateForm(TfrmRumahSakit, frmRumahSakit);
+  Application.CreateForm(TfrmMigrasi, frmMigrasi);
+  Application.CreateForm(TfrmItemLab, frmItemLab);
+  Application.CreateForm(TfrmGroupLab, frmGroupLab);
+  Application.CreateForm(TfrmViewItemLab, frmViewItemLab);
+  Application.CreateForm(TfrmLab, frmLab);
+  Application.CreateForm(TfrmCetakLab, frmCetakLab);
+  Application.CreateForm(TfrmPilihPasien, frmPilihPasien);
+  Application.CreateForm(TfrmRegLab, frmRegLab);
+  Application.CreateForm(TfrmRontgen, frmRontgen);
+  Application.CreateForm(TfrmPerujuk, frmPerujuk);
+  Application.CreateForm(TfrmLayananRontgen, frmLayananRontgen);
+  Application.CreateForm(TfrmPreferensi, frmPreferensi);
+  Application.CreateForm(TfrmAlkes, frmAlkes);
+  Application.CreateForm(TfrmBillingPasiennonaktif, frmBillingPasiennonaktif);
+  Application.CreateForm(TfrmViewAlkes, frmViewAlkes);
+  Application.CreateForm(TfrmApotek, frmApotek);
+  Application.CreateForm(TfrmViewRawatInap, frmViewRawatInap);
+  Application.CreateForm(TfrmViewPasienPoli, frmViewPasienPoli);
+  Application.CreateForm(TfrmApotik, frmApotik);
+  Application.CreateForm(Tfrmtarifdokter, frmtarifdokter);
+  Application.CreateForm(TfrmCetak, frmCetak);
+  Application.CreateForm(Tdmrpt, dmrpt);
+  Application.CreateForm(TfrmViewRontgen, frmViewRontgen);
+  Application.CreateForm(TfrmPoliTreatment, frmPoliTreatment);
+  Application.CreateForm(TfrmViewServicedokter, frmViewServicedokter);
+  Application.CreateForm(TfrmMigrasiRawatInap, frmMigrasiRawatInap);
+  Application.CreateForm(Tfrmviewpolinonmigrasi, frmviewpolinonmigrasi);
+  Application.CreateForm(Tfrmtambahanapotik, frmtambahanapotik);
+  Application.CreateForm(Tfrmviewtambahan, frmviewtambahan);
+  Application.CreateForm(TfrmStokobat, frmStokobat);
+  Application.CreateForm(Tfrmhargaobat, frmhargaobat);
+  Application.CreateForm(TfrmGantiPassword, frmGantiPassword);
+  Application.CreateForm(TfrmEditObat, frmEditObat);
+  Application.CreateForm(TfrmSatuan, frmSatuan);
+  Application.CreateForm(Tfrmantrian, frmantrian);
+  Application.CreateForm(TfrmEditKaryawan, frmEditKaryawan);
+  Application.CreateForm(Tfrmracikan, frmracikan);
+  Application.CreateForm(Tfrmtariflab, frmtariflab);
+  Application.CreateForm(Tfrmviewtariflab, frmviewtariflab);
+  Application.CreateForm(TfrmViewPasienLab, frmViewPasienLab);
+  Application.CreateForm(TfrmHasilLab, frmHasilLab);
+  Application.CreateForm(TfrmViewRegLab, frmViewRegLab);
+  Application.CreateForm(Tfrmcetakkwitansilab, frmcetakkwitansilab);
+  Application.CreateForm(TfrmCetakJualApotik, frmCetakJualApotik);
+  Application.CreateForm(TfrmTambahDeposit, frmTambahDeposit);
+  Application.CreateForm(Tfrmbillrontgen, frmbillrontgen);
+  Application.CreateForm(TfrmViewPasienRontgen, frmViewPasienRontgen);
+  Application.CreateForm(Tfrmsettingwktkeluar, frmsettingwktkeluar);
+  Application.CreateForm(TfrmLaporanBilling, frmLaporanBilling);
+  Application.CreateForm(TfrmUangKeluar, frmUangKeluar);
+  Application.CreateForm(TfrmJenisTindakan, frmJenisTindakan);
+  Application.CreateForm(TfrmKomisiDokter, frmKomisiDokter);
+  Application.CreateForm(TfrmRawatBaby, frmRawatBaby);
+  Application.Run;
+end.

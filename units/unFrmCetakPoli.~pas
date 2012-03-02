@@ -1,0 +1,189 @@
+unit unFrmCetakPoli;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, StdCtrls, Buttons, RpCon, RpConDS, db,adodb,RpDefine, RpRave;
+
+type
+  TfrmCetakPoli = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    gbData: TGroupBox;
+    Label1: TLabel;
+    txtNama: TEdit;
+    Label2: TLabel;
+    lblnoreg: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    lblUsia: TLabel;
+    lblAlamat: TLabel;
+    BitBtn1: TBitBtn;
+    rvPoli: TRvDataSetConnection;
+    rvObat: TRvDataSetConnection;
+    Label3: TLabel;
+    lblnorm: TLabel;
+    rvUser: TRvDataSetConnection;
+    BitBtn3: TBitBtn;
+    rvApotik: TRvDataSetConnection;
+    dsetRptKwitansipoli: TADODataSet;
+    dsetApotikPoli2: TADODataSet;
+    dsetApotikPoli: TADODataSet;
+    rvProjectStruk: TRvProject;
+    procedure txtNamaKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure txtNamaKeyPress(Sender: TObject; var Key: Char);
+    procedure FormActivate(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+   
+    procedure BitBtn3Click(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCetakPoli: TfrmCetakPoli;
+
+implementation
+
+uses unFrmViewPasienPoli,unUtama, unDm, unFrmPassword;
+
+{$R *.dfm}
+
+procedure TfrmCetakPoli.txtNamaKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+ if key=vk_return then
+ begin
+  frmViewPasienPoli.ShowModal;
+ end;
+end;
+
+procedure TfrmCetakPoli.txtNamaKeyPress(Sender: TObject; var Key: Char);
+begin
+ key:=#0;
+end;
+
+procedure TfrmCetakPoli.FormActivate(Sender: TObject);
+begin
+//  dm.dsetRptKwitansipoli.Requery();
+  isCetakPoli:=1;
+end;
+
+procedure TfrmCetakPoli.BitBtn1Click(Sender: TObject);
+var tempNoreg,tempkodeapotik,username : string;
+begin
+  tempNoReg := lblNoreg.Caption;
+
+ with frmPassword.dsetPassword do
+ begin
+   username := Fields.fieldByName('usNama').AsString;
+ end;
+
+  with dsetRptKwitansipoli do
+  begin
+   active:=false;
+   commandType := cmdText;
+   commandText := 'select * from talayananpoli,tapasien,tadokter,tatarifdokter,'+
+   'tadepartemen,taapotik '+
+   'where lpkodepasien like pskodepasien '+
+   'and lpkodepoli like dpkode '+
+   'and lpkodedokter like dkkodedokter '+
+   'and tdkodedokter like dkkodedokter '+
+   'and tdkodedept like lpkodepoli '+
+   'and apnoregpasien like lpnoreg '+
+   'and lpnoreg like (:noreg) ';
+   parameters.ParamByName('noreg').Value := tempNoreg;
+   active:=true;
+
+   if isempty=false then
+   begin
+     showmessage('qtmu');
+     tempkodeapotik := fields.fieldbyname('apkodeapotik').AsString;
+   end;
+
+  end;
+ // dm.dsetApotikDEtail.Requery();
+{  with dm.dsetApotikDEtail do
+  begin
+   active:=false;
+   commandType := cmdText;
+   commandText := 'select * from taapotikdetail '+
+   'where adkodeapotik like (:kode) ';
+   parameters.ParamByName('kode').Value := tempKodeApotik;
+   active:=true;
+  end;
+ }
+  rvProjectPoli.ProjectFile := 'kwitansipoli.rav';
+
+  rvProjectPoli.Open;
+
+  rvProjectPoli.SelectReport('kwitansipoli',true);
+  rvProjectPoli.SetParam('noReg',tempNoReg);
+  rvProjectPoli.SetParam('username',username);
+ // rvProjectPoli.SetParam('kodeapotik',tempKodeapotik);
+
+  rvProjectPoli.Execute;
+end;
+
+procedure TfrmCetakPoli.BitBtn3Click(Sender: TObject);
+var tempNoreg,tempkodeapotik,username : string;
+begin
+  tempNoReg := lblNoreg.Caption;
+
+ with frmPassword.dsetPassword do
+ begin
+   username := Fields.fieldByName('usNama').AsString;
+ end;
+
+  with dsetApotikpoli do
+  begin
+   active:=false;
+   commandType := cmdText;
+   commandText := 'select * from taapotik  '+
+   'where apnoregpasien like (:noreg) ';
+   parameters.ParamByName('noreg').Value := tempNoreg;
+   active:=true;
+
+   if isempty=false then
+   begin
+     showmessage('qtmu');
+     tempkodeapotik := fields.fieldbyname('apkodeapotik').AsString;
+   end;
+
+  end;
+ // dm.dsetApotikDEtail.Requery();
+{  with dm.dsetApotikDEtail do
+  begin
+   active:=false;
+   commandType := cmdText;
+   commandText := 'select * from taapotikdetail '+
+   'where adkodeapotik like (:kode) ';
+   parameters.ParamByName('kode').Value := tempKodeApotik;
+   active:=true;
+  end;
+ }
+ rvProjectStruk.ProjectFile := 'struk.rav';
+
+ rvProjectStruk.Open;
+
+  rvProjectStruk.SelectReport('struk.rav',true);
+  rvProjectStruk.SetParam('noReg',tempNoReg);
+  //rvProjectStrukpoli.SetParam('username',username);
+ // rvProjectPoli.SetParam('kodeapotik',tempKodeapotik);
+
+  rvProjectStruk.Execute;
+  rvProjectStruk.Close;
+
+end;
+
+procedure TfrmCetakPoli.FormDeactivate(Sender: TObject);
+begin
+// isCetakPoli:=0;
+end;
+
+end.

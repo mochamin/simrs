@@ -1,0 +1,56 @@
+object frmviewtambahan: Tfrmviewtambahan
+  Left = 354
+  Top = 271
+  Width = 313
+  Height = 297
+  BorderIcons = []
+  Caption = 'Biaya Tambahan'
+  Color = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Verdana'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 305
+    Height = 257
+    TabOrder = 0
+    object gridtambahan: TDBGrid
+      Left = 14
+      Top = 25
+      Width = 275
+      Height = 209
+      Ctl3D = False
+      DataSource = dm.dsourcetambahbiayaapotik
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      ParentCtl3D = False
+      TabOrder = 0
+      TitleFont.Charset = ANSI_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      OnKeyDown = gridtambahanKeyDown
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'tbjmlbungkus'
+          Title.Caption = 'Jml Bungkus'
+          Width = 150
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'tbharga'
+          Title.Caption = 'Biaya Tambahan'
+          Width = 120
+          Visible = True
+        end>
+    end
+  end
+end

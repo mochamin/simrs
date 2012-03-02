@@ -1,0 +1,7 @@
+SELECT * FROM tarawatinap, tarawatinapdetail, tapasien, takamar,   taobat, taservices
+WHERE idNoReg LIKE inNoReg AND
+svKode LIKE idKodeSv AND
+obKode LIKE idKodeSv AND
+kaKode LIKE inKodeKamar AND
+psKodePasien  LIKE inNoRM
+

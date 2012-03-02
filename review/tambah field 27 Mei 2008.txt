@@ -1,0 +1,4 @@
+table : taLab
+
+tambah field:
+-lbtgl (date)

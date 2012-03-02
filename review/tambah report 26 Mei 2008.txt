@@ -1,0 +1,3 @@
+ - kwitansi deposit di rawatinap
+ - printOut pergantian shift
+   ada tandatangan shift sebelum dan shift pengganti

@@ -1,0 +1,2 @@
+tambah database persentase untuk tagihan rawat inap
+(supaya persentase pengali bersifat flexibel)1	

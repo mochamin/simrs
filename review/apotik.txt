@@ -1,0 +1,4 @@
+untuk obat puyer ada ketentuan tarif tambahan dihitung berdasarkan jumlah bungkus.
+1-20
+21-30
+31-60

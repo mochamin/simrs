@@ -1,0 +1,10 @@
+table : RAWATINAP
+
+tambah field:
+-inBayar
+-inpicdeposit
+-inpicbayar
+
+table : taAdministrasi
+tambah field:
+- adgeneral

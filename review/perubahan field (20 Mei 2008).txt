@@ -1,0 +1,9 @@
+susunan field di tatarifdokter ganti sbb:
+- tdkodedokter 
+- tdtarif
+- tdjenisservice
+- tdwktawal
+- tdwktakhir
+
+* tambahan "FIELD" pada table talayananpoli
+  fieldname = lpkonsuldokter (double)
